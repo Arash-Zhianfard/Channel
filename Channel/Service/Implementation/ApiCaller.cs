@@ -46,7 +46,7 @@ namespace Service.Implementation
                 }
                 catch (Exception ex)
                 {
-                    throw ex();
+                    throw ex;
                 }
             }
         }
