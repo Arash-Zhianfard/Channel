@@ -92,11 +92,13 @@ namespace Service.Implementation
             {
                 using (var response = await httpClient.PutAsync(builder.ToString(), httpContent))
                 {
-                    return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync(), new JsonSerializerSettings
-                    {
-                        NullValueHandling = NullValueHandling.Ignore,
-                        DefaultValueHandling = DefaultValueHandling.Ignore
-                    });
+                    if (response.Content != null)
+                        return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync(), new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            DefaultValueHandling = DefaultValueHandling.Ignore
+                        });
+                    return default(T);
                 }
             }
             catch (Exception ex)

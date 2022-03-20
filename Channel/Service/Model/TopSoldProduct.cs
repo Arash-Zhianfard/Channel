@@ -14,13 +14,9 @@ namespace Service.Model
             Description = description;
             TotalQuantity = totalQuantity;
         }
-        public override string ToString()
+        public virtual string ToJson()
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append("  Description: ").Append(Description).Append("\n");
-            stringBuilder.Append("  Gtin: ").Append(Gtin).Append("\n");
-            stringBuilder.Append("  TotalQuantity: ").Append(TotalQuantity).Append("\n");
-            return stringBuilder.ToString();
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
     }
 }

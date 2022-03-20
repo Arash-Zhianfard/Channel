@@ -49,30 +49,39 @@ public class Executor
 
     public void Execute()
     {
-        Console.WriteLine("get product orders by filter,press any key");
-        Console.ReadKey();
-        var filteredOrder = _orderApiAsync.GetByFilterAsync(new OrderFilterOption()
+        
+        Console.WriteLine("getting data...");
+        //Task.Run used to not block the main thread
+        var orderTask = Task.Run(() => _orderApiAsync.GetByFilterAsync(new OrderFilterOption()
         {
             Statuses = new List<ChannelEngine.Merchant.ApiClient.Model.OrderStatusView>()
             {
                 ChannelEngine.Merchant.ApiClient.Model.OrderStatusView.IN_PROGRESS
             }
-        }).Result;
-        foreach (var item in filteredOrder.Content)
-        {
-            Console.WriteLine(item.ToString());
-        }
-        Console.WriteLine("get top 5 sold product,press any key");
+        }));
+        var top5Product = Task.Run(() => _productAsync.GetTopSoldProduct(5));
+        var updateStock= Task.Run(() => _offerApiSync.UpdateStockCountAsync());
+
+        Task.WaitAll(orderTask, top5Product, updateStock);
+
+        Console.WriteLine("product with filters,press any key...");
         Console.ReadKey();
-        var top5SoldProduct = _productAsync.GetTopSoldProduct(5).Result;
-        foreach (var product in top5SoldProduct)
+        foreach (var item in orderTask.Result.Content)
         {
-            Console.WriteLine(product.ToString());
+            Console.WriteLine(item.ToJson());
         }
-        Console.WriteLine("Update stock,press any key");
+        Console.WriteLine("get top 5 sold product,press any key...");
         Console.ReadKey();
-        var stockOrder = _offerApiSync.UpdateStockCountAsync().Result;
-        Console.WriteLine(stockOrder.ToString());
+        foreach (var product in top5Product.Result)
+        {
+            Console.WriteLine(product.ToJson());
+        }
+        Console.WriteLine("update stock result,press any key...");
+        Console.ReadKey();
+        Console.WriteLine(updateStock.Result.ToJson());
+
+
+
         Console.ReadKey();
     }
 }

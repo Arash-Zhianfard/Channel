@@ -43,48 +43,9 @@ namespace Service.Model
         public DateTime OrderDate { get; set; }
         public string ChannelCustomerNo { get; set; }
         public Dictionary<string, string> ExtraData { get; set; }
-        public override string ToString()
+        public virtual string ToJson()
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append("  Id: ").Append(Id).Append("\n");
-            stringBuilder.Append("  ChannelName: ").Append(ChannelName).Append("\n");
-            stringBuilder.Append("  ChannelId: ").Append(ChannelId).Append("\n");
-            stringBuilder.Append("  GlobalChannelName: ").Append(GlobalChannelName).Append("\n");
-            stringBuilder.Append("  GlobalChannelId: ").Append(GlobalChannelId).Append("\n");
-            stringBuilder.Append("  ChannelOrderSupport: ").Append(ChannelOrderSupport).Append("\n");
-            stringBuilder.Append("  ChannelOrderNo: ").Append(ChannelOrderNo).Append("\n");
-            stringBuilder.Append("  MerchantOrderNo: ").Append(MerchantOrderNo).Append("\n");
-            stringBuilder.Append("  Status: ").Append(Status).Append("\n");
-            stringBuilder.Append("  IsBusinessOrder: ").Append(IsBusinessOrder).Append("\n");
-            stringBuilder.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
-            stringBuilder.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
-            stringBuilder.Append("  MerchantComment: ").Append(MerchantComment).Append("\n");
-            stringBuilder.Append("  BillingAddress: ").Append(BillingAddress).Append("\n");
-            stringBuilder.Append("  ShippingAddress: ").Append(ShippingAddress).Append("\n");
-            stringBuilder.Append("  SubTotalInclVat: ").Append(SubTotalInclVat).Append("\n");
-            stringBuilder.Append("  SubTotalVat: ").Append(SubTotalVat).Append("\n");
-            stringBuilder.Append("  ShippingCostsVat: ").Append(ShippingCostsVat).Append("\n");
-            stringBuilder.Append("  TotalInclVat: ").Append(TotalInclVat).Append("\n");
-            stringBuilder.Append("  TotalVat: ").Append(TotalVat).Append("\n");
-            stringBuilder.Append("  OriginalSubTotalInclVat: ").Append(OriginalSubTotalInclVat).Append("\n");
-            stringBuilder.Append("  OriginalSubTotalVat: ").Append(OriginalSubTotalVat).Append("\n");
-            stringBuilder.Append("  OriginalShippingCostsInclVat: ").Append(OriginalShippingCostsInclVat).Append("\n");
-            stringBuilder.Append("  OriginalShippingCostsVat: ").Append(OriginalShippingCostsVat).Append("\n");
-            stringBuilder.Append("  OriginalTotalInclVat: ").Append(OriginalTotalInclVat).Append("\n");
-            stringBuilder.Append("  OriginalTotalVat: ").Append(OriginalTotalVat).Append("\n");
-            stringBuilder.Append("  Lines: ").Append(Lines).Append("\n");
-            stringBuilder.Append("  ShippingCostsInclVat: ").Append(ShippingCostsInclVat).Append("\n");
-            stringBuilder.Append("  Phone: ").Append(Phone).Append("\n");
-            stringBuilder.Append("  Email: ").Append(Email).Append("\n");
-            stringBuilder.Append("  CompanyRegistrationNo: ").Append(CompanyRegistrationNo).Append("\n");
-            stringBuilder.Append("  VatNo: ").Append(VatNo).Append("\n");
-            stringBuilder.Append("  PaymentMethod: ").Append(PaymentMethod).Append("\n");
-            stringBuilder.Append("  PaymentReferenceNo: ").Append(PaymentReferenceNo).Append("\n");
-            stringBuilder.Append("  CurrencyCode: ").Append(CurrencyCode).Append("\n");
-            stringBuilder.Append("  OrderDate: ").Append(OrderDate).Append("\n");
-            stringBuilder.Append("  ChannelCustomerNo: ").Append(ChannelCustomerNo).Append("\n");
-            stringBuilder.Append("  ExtraData: ").Append(ExtraData).Append("\n");
-            return stringBuilder.ToString();
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
     }
 
