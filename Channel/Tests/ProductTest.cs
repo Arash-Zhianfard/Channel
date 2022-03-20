@@ -1,6 +1,3 @@
-using ChannelEngine.Merchant.ApiClient.Api;
-using ChannelEngine.Merchant.ApiClient.Model;
-using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
 using Service.Implementation;
