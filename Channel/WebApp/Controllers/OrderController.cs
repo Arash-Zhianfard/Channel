@@ -6,14 +6,14 @@ namespace WebApp.Controllers
 {
     public class OrderController : Controller
     {
-        IOrderApiAsync _orderApiAsync;
+        private readonly IOrderApiAsync _orderApiAsync;
         public OrderController(IOrderApiAsync orderApiAsync)
         {
             this._orderApiAsync = orderApiAsync;
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _orderApiAsync.OrderGetByFilterAsync(new OrderFilterOption()
+            var result = await _orderApiAsync.GetByFilterAsync(new OrderFilterOption()
             {
                 Statuses = new List<ChannelEngine.Merchant.ApiClient.Model.OrderStatusView>()
             {
@@ -21,9 +21,6 @@ namespace WebApp.Controllers
             }
             });
             return View(result.Content);
-            
         }
-
-        
     }
 }

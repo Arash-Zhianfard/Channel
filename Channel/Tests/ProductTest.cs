@@ -15,7 +15,7 @@ namespace ChannelEngineTest
         public void Setup()
         {
             _orderApiAsyncMock = new Mock<IOrderApiAsync>();
-            _orderApiAsyncMock.Setup(x => x.OrderGetByFilterAsync(It.IsAny<OrderFilterOption>()))
+            _orderApiAsyncMock.Setup(x => x.GetByFilterAsync(It.IsAny<OrderFilterOption>()))
             .Returns(Task.FromResult(DummyOrderResponse()));
         }
 
@@ -108,13 +108,16 @@ namespace ChannelEngineTest
         [Test]
         public void TestTopNSoldProduct()
         {
+            // Arrange
             ProductApiAsync productAsync = new ProductApiAsync(_orderApiAsyncMock.Object);
             List<TopSoldProduct> expectedProduct = new List<TopSoldProduct>();
             expectedProduct.Add(new TopSoldProduct("1212", "product 2", 4));
             expectedProduct.Add(new TopSoldProduct("1212", "product 1", 3));
             expectedProduct.Add(new TopSoldProduct("12121", "product 3", 2));
             expectedProduct.Add(new TopSoldProduct("753", "product 4", 1));
+            // Act
             var result = productAsync.GetTopSoldProduct(5).Result;
+            // Assert
             Assert.That(result, Is.EqualTo(expectedProduct).Using(new TopSoldProductComparer()));
         }
     }

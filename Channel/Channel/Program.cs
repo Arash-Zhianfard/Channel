@@ -51,7 +51,7 @@ public class Executor
     {
         Console.WriteLine("get product orders by filter,press any key");
         Console.ReadKey();
-        var filteredOrder = _orderApiAsync.OrderGetByFilterAsync(new OrderFilterOption()
+        var filteredOrder = _orderApiAsync.GetByFilterAsync(new OrderFilterOption()
         {
             Statuses = new List<ChannelEngine.Merchant.ApiClient.Model.OrderStatusView>()
             {

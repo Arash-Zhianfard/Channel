@@ -16,7 +16,7 @@ namespace ChannelEngine.Merchant.ApiClient.Api
             _token = options.Value.Token;
         }
 
-        public async Task<ProductOrderResponse> OrderGetByFilterAsync(OrderFilterOption orderOption)
+        public async Task<ProductOrderResponse> GetByFilterAsync(OrderFilterOption orderOption)
         {
             RequestOption localVarRequestOptions = new RequestOption();           
             var filters = new Dictionary<String, String>();

@@ -4,6 +4,6 @@ namespace Service.Interfaces
 {
     public interface IOrderApiAsync
     {
-        Task<ProductOrderResponse> OrderGetByFilterAsync(OrderFilterOption orderOption);
+        Task<ProductOrderResponse> GetByFilterAsync(OrderFilterOption orderOption);
     }
 }

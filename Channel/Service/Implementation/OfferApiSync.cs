@@ -10,7 +10,7 @@ namespace Service.Implementation
         string _baseUrl;
         string _token;
         private IApiCaller _apiCaller { get; set; }
-        private IOrderApiAsync _orderApiAsync;
+        private readonly IOrderApiAsync _orderApiAsync;
         public OfferApiSync(IApiCaller apiCaller, IOrderApiAsync orderApiAsync, IOptions<ChannelApiSetting> options)
         {
             _apiCaller = apiCaller;
@@ -24,17 +24,16 @@ namespace Service.Implementation
             queryString.Add("apikey", _token);
             var requstOption = new RequestOption();
             requstOption.Url = _baseUrl;
-            requstOption.QueryStringItems = queryString;
-            requstOption.HeaderParameters.Add("Accept", "application/json");
+            requstOption.QueryStringItems = queryString;            
             requstOption.Body = merchantOfferStockUpdateRequest;
-            var result = await _apiCaller.PutAsync<UpdateStockResponse>(requstOption);
-            return result;
+            var stockUpdateReponse = await _apiCaller.PutAsync<UpdateStockResponse>(requstOption);
+            return stockUpdateReponse;
         }
         public async Task<UpdateStockResponse> UpdateStockCountAsync()
         {
-            var inProgressOrders = await _orderApiAsync.OrderGetByFilterAsync(new OrderFilterOption { Statuses = new List<OrderStatusView> { OrderStatusView.IN_PROGRESS } });
-            var firstLine = inProgressOrders.Content.FirstOrDefault().Lines.FirstOrDefault();
-            var result = await OfferStockUpdateAsync(new List<MerchantOfferStockUpdateRequest> {
+            var inProgressOrders = await _orderApiAsync.GetByFilterAsync(new OrderFilterOption { Statuses = new List<OrderStatusView> { OrderStatusView.IN_PROGRESS } });
+            var firstLine = inProgressOrders.Content.FirstOrDefault()?.Lines.FirstOrDefault();
+            var stockUpdateResponse = await OfferStockUpdateAsync(new List<MerchantOfferStockUpdateRequest> {
             new MerchantOfferStockUpdateRequest
             {
                 MerchantProductNo=firstLine.MerchantProductNo,
@@ -48,7 +47,7 @@ namespace Service.Implementation
                 }
             }
             });
-            return result;
+            return stockUpdateResponse;
         }
 
     }

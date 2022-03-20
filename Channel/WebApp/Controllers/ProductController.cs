@@ -5,7 +5,7 @@ namespace WebApp.Controllers
 {
     public class ProductController : Controller
     {
-        readonly IProductApiAsync _productApiAsync;
+        private readonly IProductApiAsync _productApiAsync;
 
         public ProductController(IProductApiAsync productApiAsync)
         {

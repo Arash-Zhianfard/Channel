@@ -2,7 +2,6 @@
 
 namespace Service.Model
 {
-
     public class TopSoldProduct
     {
         public string Gtin { get; }

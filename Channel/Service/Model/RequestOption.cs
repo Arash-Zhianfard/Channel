@@ -13,6 +13,6 @@
         public string Token { get; set; }
         public TimeSpan? Timeout { get; set; } = null;
         public Dictionary<string, string> QueryStringItems { get; set; } = null;
-        public Dictionary<string, string> HeaderParameters = null;
+        public Dictionary<string, string> HeaderParameters = new Dictionary<string, string> { { "Accept", "application/json" } };
     }
 }
