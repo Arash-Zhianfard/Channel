@@ -6,5 +6,4 @@ namespace Service.Interfaces
     {
         Task<ProductOrderResponse> OrderGetByFilterAsync(OrderFilterOption orderOption);
     }
-
 }

@@ -1,0 +1,222 @@
+﻿@model IEnumerable<Service.Model.MerchantOrderResponse>
+
+@{
+    ViewData["Title"] = "InProgress Orders";
+   
+}
+
+<h1>Index</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChannelName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChannelId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlobalChannelName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlobalChannelId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChannelOrderNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MerchantOrderNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBusinessOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MerchantComment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubTotalInclVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubTotalVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingCostsVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalInclVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalSubTotalInclVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalSubTotalVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalShippingCostsInclVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalShippingCostsVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalTotalInclVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalTotalVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingCostsInclVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyRegistrationNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VatNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentMethod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentReferenceNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrencyCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChannelCustomerNo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChannelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChannelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlobalChannelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlobalChannelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChannelOrderNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MerchantOrderNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBusinessOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MerchantComment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubTotalInclVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubTotalVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingCostsVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalInclVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalSubTotalInclVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalSubTotalVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalShippingCostsInclVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalShippingCostsVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalTotalInclVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalTotalVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingCostsInclVat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyRegistrationNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VatNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMethod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentReferenceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrencyCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChannelCustomerNo)
+            </td>
+    
+        </tr>
+}
+    </tbody>
+</table>

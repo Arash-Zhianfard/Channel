@@ -52,11 +52,7 @@ namespace ChannelEngine.Merchant.ApiClient.Api
             if (orderOption.ToCreatedAtDate != null)
             {
                 filters.Add("ToCreatedAtDate", orderOption.ToCreatedAtDate.ToString());
-            }
-            //if (orderOption.EexcludeMarketplaceFulfilledOrdersAndLines != null)
-            //{
-            //    (ChannelEngine.Merchant.ApiClient.Client.ClientUtils.ParameterToMultiMap("", "excludeMarketplaceFulfilledOrdersAndLines", excludeMarketplaceFulfilledOrdersAndLines));
-            //}
+            }            
             if (orderOption.FulfillmentType != null)
             {
                 filters.Add("fulfillmentType", orderOption.FulfillmentType.ToString());

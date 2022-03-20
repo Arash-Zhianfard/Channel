@@ -1,7 +1,26 @@
+using ChannelEngine.Merchant.ApiClient.Api;
+using Service.Implementation;
+using Service.Interfaces;
+using Service.Model;
+using System.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false)
+    .AddEnvironmentVariables()
+    .Build();
+builder.Services.Configure<ChannelApiSetting>(configuration.GetSection("ChannelApiSetting"));
+builder.Services
+    .AddSingleton<IApiCaller, ApiCaller>()
+    .AddSingleton<IOrderApiAsync, OrderApiAsync>()
+.AddSingleton<IOfferApiSync, OfferApiSync>()
+.AddSingleton<IProductApiAsync, ProductApiAsync>();
+
 
 var app = builder.Build();
 
