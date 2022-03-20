@@ -30,7 +30,8 @@ class Program
             .AddSingleton<IApiCaller, ApiCaller>()
             .AddSingleton<IOrderApiAsync, OrderApiAsync>()
         .AddSingleton<IOfferApiSync, OfferApiSync>()
-        .AddSingleton<IProductApiAsync, ProductApiAsync>();
+        .AddSingleton<IProductApiAsync, ProductApiAsync>()
+        .AddSingleton<IStockCharger, StockCharger>();        
     }
 }
 
@@ -59,10 +60,10 @@ public class Executor
                 ChannelEngine.Merchant.ApiClient.Model.OrderStatusView.IN_PROGRESS
             }
         }));
-        var top5Product = Task.Run(() => _productAsync.GetTopSoldProduct(5));
-        var updateStock= Task.Run(() => _offerApiSync.UpdateStockCountAsync());
+        var top5ProductTask = Task.Run(() => _productAsync.GetTopSoldProduct(5));
+        var updateStockTask= Task.Run(() => _offerApiSync.UpdateStockCountAsync());
 
-        Task.WaitAll(orderTask, top5Product, updateStock);
+        Task.WaitAll(orderTask, top5ProductTask, updateStockTask);
 
         Console.WriteLine("product with filters,press any key...");
         Console.ReadKey();
@@ -72,13 +73,13 @@ public class Executor
         }
         Console.WriteLine("get top 5 sold product,press any key...");
         Console.ReadKey();
-        foreach (var product in top5Product.Result)
+        foreach (var product in top5ProductTask.Result)
         {
             Console.WriteLine(product.ToJson());
         }
         Console.WriteLine("update stock result,press any key...");
         Console.ReadKey();
-        Console.WriteLine(updateStock.Result.ToJson());
+        Console.WriteLine(updateStockTask.Result.ToJson());
 
 
 
