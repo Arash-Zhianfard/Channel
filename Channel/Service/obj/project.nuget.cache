@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "4qaMBQxzAeJYH/X6ZtV3uoNkmw3WS4UwrkIsTZpkdW7nM6CXDyu7847Tb8X+RxyBnUEKU7BFPCJFE2jXn4FrmA==",
+  "dgSpecHash": "il7ZSyfZq53BMDVPByVMRbPXWPnLGtcClECRjhBCEShT9JHh7OErQnlAyNn2vBLLrX+KK4IxhlHx/V021/8vdw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Arash\\Desktop\\New folder\\Channel\\Channel\\Service\\Service.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Arash\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+    "C:\\Users\\Arash\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Arash\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\Arash\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\Arash\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Arash\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }
