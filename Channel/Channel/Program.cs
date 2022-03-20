@@ -29,22 +29,22 @@ class Program
         services
             .AddSingleton<IApiCaller, ApiCaller>()
             .AddSingleton<IOrderApiAsync, OrderApiAsync>()
-        .AddSingleton<IOfferApiSync, OfferApiSync>()
-        .AddSingleton<IProductApiAsync, ProductApiAsync>()
-        .AddSingleton<IStockCharger, StockCharger>();        
+            .AddSingleton<IOfferApiSync, OfferApiSync>()
+            .AddSingleton<IProductApiAsync, ProductApiAsync>()
+            .AddSingleton<IStockCharger, StockCharger>();        
     }
 }
 
 public class Executor
 {
     private readonly IOrderApiAsync _orderApiAsync;
-    private readonly IOfferApiSync _offerApiSync;
+    private readonly IStockCharger _stockCharger;
     private readonly IProductApiAsync _productAsync;
 
-    public Executor(IOrderApiAsync orderApiAsync, IOfferApiSync offerApiSync, IProductApiAsync productAsync, IOptions<ChannelApiSetting> setupOptions)
+    public Executor(IOrderApiAsync orderApiAsync, IStockCharger stockCharger, IProductApiAsync productAsync, IOptions<ChannelApiSetting> setupOptions)
     {
         _orderApiAsync = orderApiAsync;
-        _offerApiSync = offerApiSync;
+        _stockCharger = stockCharger;
         _productAsync = productAsync;
     }
 
@@ -61,7 +61,7 @@ public class Executor
             }
         }));
         var top5ProductTask = Task.Run(() => _productAsync.GetTopSoldProduct(5));
-        var updateStockTask= Task.Run(() => _offerApiSync.UpdateStockCountAsync());
+        var updateStockTask= Task.Run(() => _stockCharger.UpdateStockCountAsync());
 
         Task.WaitAll(orderTask, top5ProductTask, updateStockTask);
 

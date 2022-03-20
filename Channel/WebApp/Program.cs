@@ -16,10 +16,11 @@ var configuration = new ConfigurationBuilder()
     .Build();
 builder.Services.Configure<ChannelApiSetting>(configuration.GetSection("ChannelApiSetting"));
 builder.Services
-    .AddSingleton<IApiCaller, ApiCaller>()
-    .AddSingleton<IOrderApiAsync, OrderApiAsync>()
-.AddSingleton<IOfferApiSync, OfferApiSync>()
-.AddSingleton<IProductApiAsync, ProductApiAsync>();
+    .AddTransient<IApiCaller, ApiCaller>()
+    .AddTransient<IOrderApiAsync, OrderApiAsync>()
+    .AddTransient<IOfferApiSync, OfferApiSync>()
+    .AddTransient<IStockCharger, StockCharger>()
+    .AddTransient<IProductApiAsync, ProductApiAsync>();
 
 
 var app = builder.Build();
