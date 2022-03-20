@@ -4,10 +4,10 @@ using Service.Model;
 
 namespace Service.Implementation
 {
-    public class ProductAsync : IProductAsync
+    public class ProductApiAsync : IProductApiAsync
     {
         IOrderApiAsync _orderApiAsync;
-        public ProductAsync(IOrderApiAsync orderApiAsync)
+        public ProductApiAsync(IOrderApiAsync orderApiAsync)
         {
             _orderApiAsync = orderApiAsync;
         }

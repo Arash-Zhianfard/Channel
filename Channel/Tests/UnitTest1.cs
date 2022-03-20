@@ -111,7 +111,7 @@ namespace ChannelEngineTest
         [Test]
         public void TestTopNSoldProduct()
         {
-            ProductAsync productAsync = new ProductAsync(_orderApiAsyncMock.Object);
+            ProductApiAsync productAsync = new ProductApiAsync(_orderApiAsyncMock.Object);
             List<TopSoldProduct> expectedProduct = new List<TopSoldProduct>();
             expectedProduct.Add(new TopSoldProduct("1212", "product 2", 4));
             expectedProduct.Add(new TopSoldProduct("1212", "product 1", 3));

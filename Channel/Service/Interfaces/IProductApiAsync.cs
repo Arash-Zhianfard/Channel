@@ -2,7 +2,7 @@
 
 namespace Service.Interfaces
 {
-    public interface IProductAsync
+    public interface IProductApiAsync
     {
         Task<IEnumerable<TopSoldProduct>> GetTopSoldProduct(int number);
     }
