@@ -18,48 +18,40 @@ namespace ChannelEngine.Merchant.ApiClient.Api
 
         public async Task<ProductOrderResponse> OrderGetByFilterAsync(OrderFilterOption orderOption)
         {
-            RequestOption localVarRequestOptions = new RequestOption();
-            String[] _contentTypes = new String[] {
-            };
-            // to determine the Accept header
-            String[] _accepts = new String[] {
-                "application/json"
-            };
-            var dic = new Dictionary<String, String>();
-
-
+            RequestOption localVarRequestOptions = new RequestOption();           
+            var filters = new Dictionary<String, String>();
             if (orderOption.Statuses != null)
             {
-                orderOption.Statuses.ForEach(x => { dic.Add("Statuses", x.ToString()); });
+                orderOption.Statuses.ForEach(x => { filters.Add("Statuses", x.ToString()); });
             }
             if (orderOption.EmailAddresses != null)
             {
-                orderOption.EmailAddresses.ForEach(x => { dic.Add("EmailAddresses", x.ToString()); });
+                orderOption.EmailAddresses.ForEach(x => { filters.Add("EmailAddresses", x.ToString()); });
             }
             if (orderOption.MerchantOrderNos != null)
             {
-                orderOption.MerchantOrderNos.ForEach(x => { dic.Add("MerchantOrderNos", x.ToString()); });
+                orderOption.MerchantOrderNos.ForEach(x => { filters.Add("MerchantOrderNos", x.ToString()); });
             }
             if (orderOption.ChannelOrderNos != null)
             {
-                orderOption.ChannelOrderNos.ForEach(x => { dic.Add("ChannelOrderNos", x.ToString()); });
+                orderOption.ChannelOrderNos.ForEach(x => { filters.Add("ChannelOrderNos", x.ToString()); });
             }
             if (orderOption.FromDate != null)
             {
-                dic.Add("FromDate", orderOption.FromDate.ToString());
+                filters.Add("FromDate", orderOption.FromDate.ToString());
             }
 
             if (orderOption.ToDate != null)
             {
-                dic.Add("ToDate", orderOption.ToDate.ToString());
+                filters.Add("ToDate", orderOption.ToDate.ToString());
             }
             if (orderOption.FromCreatedAtDate != null)
             {
-                dic.Add("FromCreatedAtDate", orderOption.FromCreatedAtDate.ToString());
+                filters.Add("FromCreatedAtDate", orderOption.FromCreatedAtDate.ToString());
             }
             if (orderOption.ToCreatedAtDate != null)
             {
-                dic.Add("ToCreatedAtDate", orderOption.ToCreatedAtDate.ToString());
+                filters.Add("ToCreatedAtDate", orderOption.ToCreatedAtDate.ToString());
             }
             //if (orderOption.EexcludeMarketplaceFulfilledOrdersAndLines != null)
             //{
@@ -67,41 +59,40 @@ namespace ChannelEngine.Merchant.ApiClient.Api
             //}
             if (orderOption.FulfillmentType != null)
             {
-                dic.Add("fulfillmentType", orderOption.FulfillmentType.ToString());
+                filters.Add("fulfillmentType", orderOption.FulfillmentType.ToString());
             }
             if (orderOption.OnlyWithCancellationRequests != null)
             {
-                dic.Add("onlyWithCancellationRequests", orderOption.OnlyWithCancellationRequests.ToString());
+                filters.Add("onlyWithCancellationRequests", orderOption.OnlyWithCancellationRequests.ToString());
             }
             if (orderOption.ChannelIds != null)
             {
-                orderOption.ChannelIds.ForEach(x => { dic.Add("channelIds", x.ToString()); });
+                orderOption.ChannelIds.ForEach(x => { filters.Add("channelIds", x.ToString()); });
             }
             if (orderOption.StockLocationIds != null)
             {
-                orderOption.StockLocationIds.ForEach(x => { dic.Add("stockLocationIds", x.ToString()); });
+                orderOption.StockLocationIds.ForEach(x => { filters.Add("stockLocationIds", x.ToString()); });
             }
             if (orderOption.IsAcknowledged != null)
             {
-                dic.Add("isAcknowledged", orderOption.IsAcknowledged.ToString());
+                filters.Add("isAcknowledged", orderOption.IsAcknowledged.ToString());
             }
             if (orderOption.FromUpdatedAtDate != null)
             {
-                dic.Add("FromUpdatedAtDate", orderOption.FromUpdatedAtDate.ToString());
+                filters.Add("FromUpdatedAtDate", orderOption.FromUpdatedAtDate.ToString());
             }
             if (orderOption.ToUpdatedAtDate != null)
             {
-                dic.Add("toUpdatedAtDate", orderOption.ToUpdatedAtDate.ToString());
+                filters.Add("toUpdatedAtDate", orderOption.ToUpdatedAtDate.ToString());
             }
             if (orderOption.Page != null)
             {
-                dic.Add("Page", orderOption.Page.ToString());
+                filters.Add("Page", orderOption.Page.ToString());
             }
-            dic.Add("apikey", _token);
-            var requstOption = new RequestOption();
-            requstOption.ContentType = "application/json";
+            filters.Add("apikey", _token);
+            var requstOption = new RequestOption();            
             requstOption.Url = _baseUrl;
-            requstOption.QueryStringItems = dic;
+            requstOption.QueryStringItems = filters;
             requstOption.HeaderParameters.Add("Accept", "application/json");
             var response = await _apiCaller.GetAsync<ProductOrderResponse>(requstOption);
             return response;
