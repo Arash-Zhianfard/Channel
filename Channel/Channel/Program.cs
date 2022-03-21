@@ -85,7 +85,8 @@ public class Executor
         Console.ReadKey();
         if (updateStockTask.Result.Success)
             Console.WriteLine(updateStockTask.Result.ToJson());
-        else Console.WriteLine(top5ProductTask.Result.Message);
+        else
+            Console.WriteLine(top5ProductTask.Result.Message);
 
 
         Console.ReadKey();

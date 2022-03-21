@@ -42,7 +42,8 @@ namespace Service.Implementation
                 return new UpdateStockResponse()
                 {
                     StatusCode = (int)HttpStatusCode.InternalServerError,
-                    Message = "something went wrong"
+                    Message = "something went wrong",
+                    Success = false
                 };
             }
         }

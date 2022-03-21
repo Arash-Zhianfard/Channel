@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Implementation;
 using Service.Interfaces;
+using System.Net;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
@@ -13,8 +15,18 @@ namespace WebApp.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _stockCharger.UpdateStockCountAsync();
-            return View(result);
+            try
+            {
+                var result = await _stockCharger.UpdateStockCountAsync();
+                if (result.Success)
+                    return View(result);
+                return View("Error", new ErrorViewModel() { Message = result.Message, Code = (int)HttpStatusCode.InternalServerError });
+            }
+            catch (Exception ex)
+            {
+                //log
+                return View("Error", new ErrorViewModel() { Message = "somthing went wrong", Code = (int)HttpStatusCode.InternalServerError });
+            }
         }
     }
 }

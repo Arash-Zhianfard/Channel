@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
 using Service.Model;
+using System.Net;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
@@ -13,14 +15,24 @@ namespace WebApp.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _orderApiAsync.GetByFilterAsync(new OrderFilterOption()
+            try
             {
-                Statuses = new List<ChannelEngine.Merchant.ApiClient.Model.OrderStatusView>()
+                var result = await _orderApiAsync.GetByFilterAsync(new OrderFilterOption()
+                {
+                    Statuses = new List<ChannelEngine.Merchant.ApiClient.Model.OrderStatusView>()
             {
                 ChannelEngine.Merchant.ApiClient.Model.OrderStatusView.IN_PROGRESS
             }
-            });
-            return View(result.Content);
+                });
+                if (result.Success)
+                    return View(result.Content);
+                return View("Error", new ErrorViewModel() { Message = result.Message, Code = (int)HttpStatusCode.InternalServerError });
+            }
+            catch (Exception ex)
+            {
+                //log
+                return View("Error", new ErrorViewModel() { Message = "somthing went wrong", Code = (int)HttpStatusCode.InternalServerError });
+            }
         }
     }
 }

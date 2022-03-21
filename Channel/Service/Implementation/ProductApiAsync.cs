@@ -41,7 +41,8 @@ namespace Service.Implementation
                 return new TopSoldProductResponse()
                 {
                     StatusCode = (int)HttpStatusCode.InternalServerError,
-                    Message = "something went wrong"
+                    Message = "something went wrong",
+                    Success = false
                 };
             }
         }
