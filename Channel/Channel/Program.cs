@@ -31,7 +31,7 @@ class Program
             .AddSingleton<IOrderApiAsync, OrderApiAsync>()
             .AddSingleton<IOfferApiSync, OfferApiSync>()
             .AddSingleton<IProductApiAsync, ProductApiAsync>()
-            .AddSingleton<IStockCharger, StockCharger>();        
+            .AddSingleton<IStockCharger, StockCharger>();
     }
 }
 
@@ -50,7 +50,7 @@ public class Executor
 
     public void Execute()
     {
-        
+
         Console.WriteLine("getting data...");
         //Task.Run used to not block the main thread and run all Api Parallel
         var orderTask = Task.Run(() => _orderApiAsync.GetByFilterAsync(new OrderFilterOption()
@@ -61,26 +61,31 @@ public class Executor
             }
         }));
         var top5ProductTask = Task.Run(() => _productAsync.GetTopSoldProduct(5));
-        var updateStockTask= Task.Run(() => _stockCharger.UpdateStockCountAsync());
+        var updateStockTask = Task.Run(() => _stockCharger.UpdateStockCountAsync());
 
         Task.WaitAll(orderTask, top5ProductTask, updateStockTask);
 
         Console.WriteLine("product with filters,press any key...");
         Console.ReadKey();
-        foreach (var item in orderTask.Result.Content)
-        {
-            Console.WriteLine(item.ToJson());
-        }
+        if (orderTask.Result.Success)
+            foreach (var item in orderTask.Result.Content)
+            {
+                Console.WriteLine(item.ToJson());
+            }
+        else Console.WriteLine(top5ProductTask.Result.Message);
         Console.WriteLine("get top 5 sold product,press any key...");
         Console.ReadKey();
-        foreach (var product in top5ProductTask.Result.Content)
-        {
-            Console.WriteLine(product.ToJson());
-        }
+        if (top5ProductTask.Result.Success)
+            foreach (var product in top5ProductTask.Result.Content)
+            {
+                Console.WriteLine(product.ToJson());
+            }
+        else Console.WriteLine(top5ProductTask.Result.Message);
         Console.WriteLine("update stock result,press any key...");
         Console.ReadKey();
-        Console.WriteLine(updateStockTask.Result.ToJson());
-
+        if (updateStockTask.Result.Success)
+            Console.WriteLine(updateStockTask.Result.ToJson());
+        else Console.WriteLine(top5ProductTask.Result.Message);
 
 
         Console.ReadKey();
