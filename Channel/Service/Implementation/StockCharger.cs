@@ -1,6 +1,7 @@
 ﻿using ChannelEngine.Merchant.ApiClient.Model;
 using Service.Interfaces;
 using Service.Model;
+using System.Net;
 
 namespace Service.Implementation
 {
@@ -16,9 +17,11 @@ namespace Service.Implementation
         }
         public async Task<UpdateStockResponse> UpdateStockCountAsync()
         {
-            var inProgressOrders = await _orderApiAsync.GetByFilterAsync(new OrderFilterOption { Statuses = new List<OrderStatusView> { OrderStatusView.IN_PROGRESS } });
-            var firstLine = inProgressOrders.Content.FirstOrDefault()?.Lines.FirstOrDefault();
-            var stockUpdateResponse = await _offerApiSync.OfferStockUpdateAsync(new List<MerchantOfferStockUpdateRequest> {
+            try
+            {
+                var inProgressOrders = await _orderApiAsync.GetByFilterAsync(new OrderFilterOption { Statuses = new List<OrderStatusView> { OrderStatusView.IN_PROGRESS } });
+                var firstLine = inProgressOrders.Content.FirstOrDefault()?.Lines.FirstOrDefault();
+                var stockUpdateResponse = await _offerApiSync.OfferStockUpdateAsync(new List<MerchantOfferStockUpdateRequest> {
             new MerchantOfferStockUpdateRequest
             {
                 MerchantProductNo=  firstLine.MerchantProductNo,
@@ -32,7 +35,16 @@ namespace Service.Implementation
                 }
             }
             });
-            return stockUpdateResponse;
+                return stockUpdateResponse;
+            }
+            catch (Exception ex)
+            {
+                return new UpdateStockResponse()
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError,
+                    Message = "something went wrong"
+                };
+            }
         }
 
     }

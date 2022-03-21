@@ -73,7 +73,7 @@ public class Executor
         }
         Console.WriteLine("get top 5 sold product,press any key...");
         Console.ReadKey();
-        foreach (var product in top5ProductTask.Result)
+        foreach (var product in top5ProductTask.Result.Content)
         {
             Console.WriteLine(product.ToJson());
         }

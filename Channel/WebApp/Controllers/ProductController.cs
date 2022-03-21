@@ -14,8 +14,8 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var result =await _productApiAsync.GetTopSoldProduct(5);
-            return View(result);
+            var result = await _productApiAsync.GetTopSoldProduct(5);
+            return View(result);            
         }
     }
 }

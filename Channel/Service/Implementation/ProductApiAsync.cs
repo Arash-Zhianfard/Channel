@@ -1,6 +1,7 @@
 ﻿using ChannelEngine.Merchant.ApiClient.Model;
 using Service.Interfaces;
 using Service.Model;
+using System.Net;
 
 namespace Service.Implementation
 {
@@ -11,24 +12,38 @@ namespace Service.Implementation
         {
             _orderApiAsync = orderApiAsync;
         }
-        public async Task<IEnumerable<TopSoldProduct>> GetTopSoldProduct(int number)
+        public async Task<TopSoldProductResponse> GetTopSoldProduct(int number)
         {
-            var result = await _orderApiAsync.GetByFilterAsync(new OrderFilterOption()
+            try
             {
-                Statuses = new List<OrderStatusView>()
+                var response = new TopSoldProductResponse();
+                var result = await _orderApiAsync.GetByFilterAsync(new OrderFilterOption()
+                {
+                    Statuses = new List<OrderStatusView>()
             {
                 OrderStatusView.IN_PROGRESS
             }
-            });
-            var top5SoldProd = result.Content.SelectMany(x => x.Lines)
-                .GroupBy(x => new { x.Gtin, x.Description, x.MerchantProductNo })
-                          .Select(g => new TopSoldProduct(
-                                  g.Key.Gtin,
-                                  g.Key.Description,
-                                  g.Sum(x => x.Quantity)
-                          ))
-                          .OrderByDescending(x => x.TotalQuantity).Take(number);
-            return top5SoldProd.ToList();
+                });
+                var top5SoldProd = result.Content.SelectMany(x => x.Lines)
+                    .GroupBy(x => new { x.Gtin, x.Description, x.MerchantProductNo })
+                              .Select(g => new TopSoldProduct(
+                                      g.Key.Gtin,
+                                      g.Key.Description,
+                                      g.Sum(x => x.Quantity)
+                              ))
+                              .OrderByDescending(x => x.TotalQuantity).Take(number);
+                response.Content = top5SoldProd;
+                return response;
+            }
+
+            catch (Exception ex)
+            {
+                return new TopSoldProductResponse()
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError,
+                    Message = "something went wrong"
+                };
+            }
         }
     }
 }
