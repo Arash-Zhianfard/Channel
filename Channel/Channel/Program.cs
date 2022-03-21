@@ -52,7 +52,7 @@ public class Executor
     {
         
         Console.WriteLine("getting data...");
-        //Task.Run used to not block the main thread
+        //Task.Run used to not block the main thread and run all Api Parallel
         var orderTask = Task.Run(() => _orderApiAsync.GetByFilterAsync(new OrderFilterOption()
         {
             Statuses = new List<ChannelEngine.Merchant.ApiClient.Model.OrderStatusView>()
